@@ -1,0 +1,19 @@
+# Claude Code 个人配置（每人不同，不提交）
+.claude/datamap-config.local.json
+
+# Playwright MCP 下载目录
+.playwright-mcp/
+
+# 数据产出目录
+data/
+
+# Chrome 独立配置（含登录 cookies，不提交）
+.chrome-profile/
+
+# 嵌套 git 仓库
+claude-howto/
+mifi-policy-platform-execution/
+
+# Node.js
+node_modules/
+package-lock.json

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /c/Users/likai/.claude/commands)",
+      "Bash(cp \"d:/策略配置/claude-howto/01-slash-commands/\"*.md /c/Users/likai/.claude/commands/)",
+      "Bash(mkdir -p /c/Users/likai/.claude/agents)",
+      "Bash(cp \"d:/策略配置/claude-howto/04-subagents/\"*.md /c/Users/likai/.claude/agents/)",
+      "Bash(cp -r /c/Users/likai/.claude/skills /tmp/claude-code-setup/.claude/)",
+      "Bash(cp -r /c/Users/likai/.claude/commands /tmp/claude-code-setup/.claude/)",
+      "Bash(cp -r /c/Users/likai/.claude/agents /tmp/claude-code-setup/.claude/)",
+      "Bash(cp /c/Users/likai/.claude/settings.json /tmp/claude-code-setup/.claude/settings.json)",
+      "Bash(mkdir -p \"d:/策略配置/.claude/commands\")",
+      "Bash(mkdir -p \"d:/策略配置/.claude/docs\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\likai"
+    ]
+  }
+}
