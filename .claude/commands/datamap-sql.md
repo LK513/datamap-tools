@@ -244,6 +244,23 @@ PYEOF
 2. 完整字段列表（字段名、类型、说明）
 3. 业务含义（如枚举值：MXJ_result 1=通过，2=拒绝，-1=未处理，7=其他）
 
+### 自动同步到 GitHub
+
+更新表结构文件后，**必须**自动提交并推送到 GitHub，让团队其他人同步：
+
+```bash
+cd "项目根目录"
+git add .claude/docs/table-schemas.md
+git commit -m "docs: 更新表结构 - [表名]"
+git pull --rebase origin main && git push origin main
+```
+
+如果 push 失败（比如没有配置 git 凭证），提示用户：
+> 表结构已更新到本地，但推送到 GitHub 失败。请配置 git 凭证后手动 push：
+> ```
+> git push origin main
+> ```
+
 ## 错误处理
 
 - 如果页面跳转到登录页，提示用户需要先手动登录
