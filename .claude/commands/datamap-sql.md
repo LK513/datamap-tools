@@ -17,13 +17,13 @@ $ARGUMENTS
 ### 第1步：检查 agent-browser 是否可用
 
 ```bash
-agent-browser --version
+npx agent-browser --version
 ```
 
 如果命令不存在，自动安装：
 
 ```bash
-cd "项目根目录" && npm install
+npm install
 ```
 
 安装完成后再次验证。如果仍失败，提示用户检查 Node.js 环境。
@@ -47,12 +47,12 @@ start "" "chrome" --remote-debugging-port=9222 --user-data-dir=".chrome-profile"
 
 等待 4 秒后连接：
 ```bash
-agent-browser connect 9222
+npx agent-browser connect 9222
 ```
 
 如果端口已被占用（说明之前已启动），直接连接：
 ```bash
-agent-browser connect 9222
+npx agent-browser connect 9222
 ```
 
 ### 第3步：检查本地配置
@@ -61,13 +61,13 @@ agent-browser connect 9222
 
 1. 打开数据地图首页：
    ```bash
-   agent-browser open "http://datamap.pdt.mixiaojin.srv/"
-   agent-browser wait --load networkidle
+   npx agent-browser open "http://datamap.pdt.mixiaojin.srv/"
+   npx agent-browser wait --load networkidle
    ```
 
 2. 获取页面快照，找到用户的笔记本：
    ```bash
-   agent-browser snapshot -i
+   npx agent-browser snapshot -i
    ```
 
 3. 从快照中找到包含 `noteId` 的笔记本链接，提取 noteId
@@ -104,9 +104,9 @@ agent-browser connect 9222
 ### 第一步：导航到数据地图
 
 ```bash
-agent-browser open "http://datamap.pdt.mixiaojin.srv/#/sql/query?noteId={noteId}"
-agent-browser wait --load networkidle
-agent-browser get title
+npx agent-browser open "http://datamap.pdt.mixiaojin.srv/#/sql/query?noteId={noteId}"
+npx agent-browser wait --load networkidle
+npx agent-browser get title
 ```
 
 确认页面标题为「SQL查询 - 数据地图」。如果跳转到登录页，**停止执行**并提示用户先手动登录。
@@ -116,7 +116,7 @@ agent-browser get title
 使用 agent-browser 的 eval 命令通过 CodeMirror API 写入 SQL：
 
 ```bash
-agent-browser eval "document.querySelectorAll('.CodeMirror')[0].CodeMirror.setValue('YOUR_SQL_HERE')"
+npx agent-browser eval "document.querySelectorAll('.CodeMirror')[0].CodeMirror.setValue('YOUR_SQL_HERE')"
 ```
 
 **注意事项：**
@@ -127,7 +127,7 @@ agent-browser eval "document.querySelectorAll('.CodeMirror')[0].CodeMirror.setVa
 ### 第三步：执行 SQL
 
 ```bash
-agent-browser eval "
+npx agent-browser eval "
   const cm0 = document.querySelectorAll('.CodeMirror')[0];
   let container = cm0;
   for (let i = 0; i < 10; i++) {
@@ -142,13 +142,13 @@ agent-browser eval "
 
 ### 第四步：等待查询完成
 
-- 小查询（<100行）：`agent-browser wait 5`
-- 中等查询（100-1000行）：`agent-browser wait 15`
-- 大查询（>1000行）：`agent-browser wait 30`
+- 小查询（<100行）：`npx agent-browser wait 5`
+- 中等查询（100-1000行）：`npx agent-browser wait 15`
+- 大查询（>1000行）：`npx agent-browser wait 30`
 
 检查是否还在加载：
 ```bash
-agent-browser eval "!!document.querySelector('.ant-spin-spinning')"
+npx agent-browser eval "!!document.querySelector('.ant-spin-spinning')"
 ```
 
 ### 第五步：读取结果
@@ -156,7 +156,7 @@ agent-browser eval "!!document.querySelector('.ant-spin-spinning')"
 从 Vue 组件的 dataSource 中读取数据（支持全部行，不受分页限制）：
 
 ```bash
-agent-browser eval "
+npx agent-browser eval "
   const tables = document.querySelectorAll('.ant-table');
   const firstTable = tables[0];
   let el = firstTable;
@@ -190,20 +190,20 @@ agent-browser eval "
 点击结果区域的下载按钮：
 
 ```bash
-agent-browser eval "
+npx agent-browser eval "
   const wrapper = document.querySelector('[id^=pannel-wrapper]');
   const icons = wrapper.querySelectorAll('.wheader__btns.operation-bar .anticon');
   const visibleIcons = Array.from(icons).filter(el => el.getBoundingClientRect().width > 0);
   const downloadBtn = visibleIcons[visibleIcons.length - 3];
   downloadBtn.click();
 "
-agent-browser wait 1
-agent-browser snapshot -i
+npx agent-browser wait 1
+npx agent-browser snapshot -i
 ```
 
 从快照中找到「导出csv」选项并点击：
 ```bash
-agent-browser click @eN   # N 是导出csv对应的ref编号
+npx agent-browser click @eN   # N 是导出csv对应的ref编号
 ```
 
 下载的文件会自动保存到 `.playwright-mcp/` 目录（如果用 agent-browser 则保存到浏览器默认下载目录）。
